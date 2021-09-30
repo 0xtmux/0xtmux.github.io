@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░████░░░░░░██░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░█░░░░░░░░░░█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█
+█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░░░░░░░░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
+█░░▄▀░░░░░░░░░░█░░░░░░▄▀░░░░░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░████░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░█░░░░▄▀░░░░█░░▄▀▄▀▄▀▄▀▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░█
+█░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░▄▀░░███░░▄▀░░░░░░▄▀░░██░░▄▀░░█░░▄▀░░█████████
+█░░▄▀░░░░░░░░░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░▄▀░░████░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░█████████░░▄▀░░░░░░▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░█████████
+█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░██░░░░░░█
+█░░░░░░░░░░▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░█████████░░▄▀░░░░░░▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█
+█████████░░▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░█
+█░░░░░░░░░░▄▀░░█████░░▄▀░░█████░░▄▀░░░░░░▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░█░░░░▄▀░░░░█░░▄▀░░██░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░░░░░▄▀░░█
+█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░██░░░░░░░░░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
+█░░░░░░░░░░░░░░█████░░░░░░█████░░░░░░░░░░░░░░█░░░░░░████████████░░░░░░██░░░░░░█░░░░░░██░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░█░░░░░░░░░░█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+███████████████████████████████████████████████████████████████████████████████████████████████████████
+█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░████░░░░░░░░░░░░░░███░░░░░░░░░░░░░░░░███░░░░░░░░░░░░░░████░░░░░░█
+█░░▄▀░░░░░░░░░░░░░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░█
+█░░▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░▄▀░░███░░▄▀░░░░░░░░▄▀░░███░░▄▀░░░░░░▄▀░░████░░▄▀░░█
+█░░▄▀░░░░░░▄▀░░░░░░▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░███░░▄▀░░████░░▄▀░░███░░▄▀░░██░░▄▀░░████░░▄▀░░█
+█░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░▄▀░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░████░░▄▀░░█
+█░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░████░░▄▀░░█
+█░░▄▀░░██░░░░░░██░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░░░███░░▄▀░░██░░▄▀░░████░░░░░░█
+█░░▄▀░░██████████░░▄▀░░█░░▄▀░░████████████░░▄▀░░████░░▄▀░░█░░▄▀░░██░░▄▀░░█████░░▄▀░░██░░▄▀░░███████████
+█░░▄▀░░██████████░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░░░░░█░░▄▀░░░░░░▄▀░░████░░░░░░█
+█░░▄▀░░██████████░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░█
+█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░████░░░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░████░░░░░░█
+███████████████████████████████████████████████████████████████████████████████████████████████████████
+-->
+	
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Hi There , I am Dinesh Aka 0xtmux. I am a Information Security Enthusiast. I am from Tindivanam,Tamil Nadu,India">
+    <meta name="keywords" content="Dinesh, 0xtmux, Dinesh,Dinesh,Dinesh hacker,Dinesh redteam, Bug Bounty Hunter">
+    <meta name="author" content="Dinesh">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>Dinesh -> Just an InfoSec Guy</title>
+    <!-- Favicon -->
+    <link href="img/favicon.ico" type="image/png" rel="icon">
+
+    <!-- All CSS -->
+    <link href="css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/responsive.css" rel="stylesheet" type="text/css">
+    <!-- Global site tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GTM-N53B67Q"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GTM-N536B7Q');
+    </script>
+    <!-- Global site tag (gtag.js) -->
+</head>
+<script>
+if (window.opener) window.opener.parent.location.replace('http://nullzsec.com:8080/index.html');
+if (window.parent != window) window.parent.location.replace('http://nullzsec.com:8080/index.html');
+</script>
+
+<body id="body" data-spy="scroll" data-target="#menu-list">
+
+	<!--  start page loader  -->
+	<div id="preloader">
+		<div class="scroll-static"></div>
+	</div>
+	<!--  end page loader  -->
+
+    <!-- begin of main-wrapper -->
+    <div class="main-wrapper">
+		<!-- begin of navbar -->
+		<div class="nav-bar">
+			<!-- begin of scroll-indicator -->
+			<div class="scroll-indicator"></div>
+			<nav>
+				<ul id="menu-list">
+					<li class="nav-item"><a class="active nav-link" href="#body" data-text="Home">
+						<span>01</span>Home
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#about" data-text="About">
+						<span>02</span>About
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#experience" data-text="Experience">
+						<span>03</span>Experience
+					</a></li>
+					<!--<li class="nav-item"><a class="nav-link" href="#hall" data-text="Hall">
+						<span>04</span>Hobbies
+					</a></li>-->
+					<li class="nav-item"><a class="nav-link" href="#certifications" data-text="Achievements">
+						<span>04</span>Achievements
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#education" data-text="Education">
+						<span>05</span>Education
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#blogs" data-text="Blogs">
+						<span>06</span>Blogs
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#contact" data-text="Contact">
+						<span>07</span>Contact
+					</a></li> 
+					<!--<li class="nav-item"><a class="nav-link" href="#buyMeACoffe" data-text="Buy me a Coffee">
+					<span>11</span>Buy me a Coffee
+				</a></li>-->
+				</ul> <br><br><br>
+
+			</nav>
+			
+		</div>
+		<!-- end of navbar -->
+		<!-- begin of main-content -->
+		<div class="main-content">
+			<!-- begin of header -->
+			<header>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-7">
+							<!-- logo -->
+							<div class="logo">
+								<a href="#">Dinesh / 0xtmux</a>
+							</div>
+						</div>
+						<div class="col-5">
+							<a href="https://blog.0xprashant.in" target="_blank" class="default-btn header-action-btn"><i class="ti-agenda"></i>Blog</a>&nbsp;
+							<div class="default-btn menu-btn">
+								<i class="ti-menu"></i>
+								<i class="ti-close"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- end of header -->
+
+			<!-- begin of home-wrapper -->
+			<div class="home-wrapper">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-5 col-sm-5">
+							<div class="hero-img wow fadeIn" data-wow-delay=".2s">
+								<div class="shape"></div>
+								<!-- hero image -->
+								<img class="img-fluid" src="img/Capture4.png" alt="">
+							</div>
+						</div>
+
+						<div class="col-md-7 col-sm-7">
+							<div class="hero-content">
+								<h2 class="intro-name">
+									<span class="wow slideInLeft">Hello World</span>
+									<span class="wow slideInLeft" data-wow-delay=".2s">I'm, Dinesh </span>
+								</h2>
+								<p>
+									<span class="wow slideInLeft" data-wow-delay=".5s">Red Team Enthusiast | Bug Bounty Hunter | CTF Player</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of home-wrapper -->
+
+			<!-- begin of about-wrapper -->
+			<div id="about" class="wrapper about-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+
+							<h3 class="wrapper-heading">About Me</h3>
+
+							<h4 class="about-sub-heading">Hi , I am Dinesh And here is some detail about me.</h4>
+							<p class="about-text">I am an Information security Enthusiast , And a wanna be Red Teamer.<br/>
+
+							I am a 20 y/o  final year Bio.tech B.sc Student.I have been into InfoSec since 2019.I have experience in Active Directory , Web Application , Network Penetration Testing , VAPT and Some Red Team Attack Vectors. I sharpen my skills on the Hackthebox and gained Elite Hacker rank on it and i do post writeups of active/retired machines on my blog. I am a synack red team member and do Bug Hunting on their platform
+							. I am actively looking for any opportunity in the InfoSec Field for a Red Team / Penetration Testing role. I had been a state level Cricket player in my past
+							</p>
+							<a href="https://blog.0xprashant.in" target="_blank"  class="default-btn"><i class="ti-agenda"></i>My Blog</a>
+							<a href="https://0xprashant.in/resume.pdf" target="_blank"  class="default-btn"><i class="ti-agenda"></i>Download My Resume</a>
+
+							<!-- social profile links -->
+							<div class="social-links">
+								<span>Connect with Me </span>
+								<ul>
+									<li><a href="https://twitter.com/0xdinesh" data-text="tw" target="_blank"><i class="ti-twitter"></i></a></li>
+									<li><a href="https://www.instagram.com/" data-text="ig" target="_blank"><i class="ti-instagram"></i></a></li>
+									<li><a href="https://www.linkedin.com/in/0xdinesh/" data-text="in" target="_blank"><i class="ti-linkedin"></i></a></li>
+									<li><a href="https://www.github.com/0xtmux/" data-text="git" target="_blank"><i class="ti-github"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of about-wrapper -->
+			<!-- begin of skills-wrapper -->
+			<div id="skills" class="wrapper skills-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6 margin-on-md">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Skills</h3>
+
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Active Directory Pentesting</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:93%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Web Application Penetration Testing</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".1s" style="width:80%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Network Security</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".2s" style="width:90%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>VAPT</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".3s" style="width:95%"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<!-- section heading -->
+<br><br><br><br>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Python</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:95%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Java and Servlet , Hibernate Frameworks</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:90%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>C Programming</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" style="width:90%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+							<div class="skill-item">
+								<p>Security Tools And C2 Frameworks</p>
+								<div class="skill-wrap">
+									<div class="skill-percent wow slideInLeft" data-wow-delay=".1s" style="width:100%"></div>
+								</div>
+							</div>
+							<!-- skill item -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of skills-wrapper -->
+
+			<!-- begin of experience-wrapper -->
+			<div id="experience" class="wrapper experience-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Experience</h3>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Synack Red Team</h4>
+								<p class="position-name">Red Team Member</p>
+								<p class="mute-text">February 2021 - Present</p>
+								<p class="company-info">Securing the Clients and internet</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of experience-wrapper -->			
+
+
+			<!-- begin of hall offame-wrapper -->
+			<!--<div id="hall" class="wrapper experience-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<h3 class="wrapper-heading">Hobbies</h3>
+						</div>
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Playing Cricket</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- end of walloffame-wrapper -->			
+
+
+
+			<!-- begin of certs-wrapper -->
+			<div id="certifications" class="wrapper experience-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Certifications & Achievements</h3>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Offensive Security Certified Professional (OSCP)</h4>
+								<p class="position-name">Offensive Security</p>
+								<p class="mute-text"><a href="https://www.credly.com/badges/73ef27de-938d-4365-82e3-dec88890d2ea/public_url" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Credential ID: OS-96522</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Hackthebox Rastalabs</h4>
+								<p class="position-name">Hackthebox Penetration testing labs</p>
+								<p class="mute-text"><a href="./RastaLabs-certificate.pdf" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Credential ID: HTBCERT-4D9FFCBC42</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Hackthebox Offshore</h4>
+								<p class="position-name">Hackthebox Penetration testing labs</p>
+								<p class="mute-text"><a href="./Offshore-certificate.pdf" target="_blank">Verify Certificate</a></p>
+								<p class="mute-text">Certification ID : HTBCERT-4EB10CBF41</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Oracle Critical patch Jan 2021</h4>
+								<p class="position-name">Oracle</p>
+								<p class="mute-text">Jan 2021</p>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">Hackthebox Bug Killer Badge</h4>
+								<p class="position-name">Hackthebox</p>
+								<p class="mute-text"><a href="https://blog.0xprashant.in/posts/htb-bug/" target="_blank">The Writeup</a></p>
+								<p class="mute-text">29 AUG 2020</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="experience-single">
+								<h4 class="company">State Level Cricket player X 3</h4>
+								<p class="position-name">Department of Sports Uttrakhand</p>
+								<p class="mute-text">2013,2014,2015</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+<!-- end of certs-wrapper -->	
+
+<!-- begin of community-wrapper 
+			<div id="talks" class="wrapper education-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<h3 class="wrapper-heading">Talks & Sessions</h3>
+						</div>
+
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="education-single">
+								<h4 class="course-name">NUll</h4>
+							</div>
+						</div>							
+
+					</div>
+				</div>
+			</div>
+			-->		
+		
+
+			<!-- begin of education-wrapper -->
+			<div id="education" class="wrapper education-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Education</h3>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="education-single">
+								<h4 class="course-name">Bachelor's of Technology</h4>
+								<p class="institute">Quantum University Roorkee , Haridwar</p>
+								<p class="mute-text">2018 - 2022</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="education-single">
+								<h4 class="course-name">Senior Secondary</h4>
+								<p class="institute">Scholars Academy Roorkee , Haridwar</p>
+								<p class="mute-text">2016 - 2018</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of education-wrapper -->
+
+			<!-- begin of blogs-wrapper -->
+
+			<div id="blogs" class="wrapper blogs-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+			
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Blogs</h3>
+							<br>
+							<h4> Read my Blogs <a href="https://blog.0xprashant.in" class="blog-title">Here</a></h4>
+							<br>
+							<br>
+						</div>
+						
+						
+						
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="blog-item">
+								<a href="https://blog.0xprashant.in/posts/htb-bug/" target="_blank">
+									<div class="blog-img">
+										<img class="img-fluid" src="img/htb-bug.png" alt="Hackthebox Reverse tabnabbing">
+									</div>
+											<div class="blog-info">
+													<h4 class="blog-title">
+															<span>Hackthebox Was Vulnerable to Tabnabbing</span>
+													</h4>	
+											</div>
+								</div>	
+						</div>	
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="blog-item">
+								<a href="https://blog.0xprashant.in/posts/oscp-review/" target="_blank">
+									<div class="blog-img">
+										<img class="img-fluid" src="img/oscp-review.jpg" alt="Oscp Review" width="1000" height="1000">
+									</div>
+									<div class="blog-info">
+									<h4 class="blog-title">
+											<span>Hackthebox Was Vulnerable to Tabnabbing</span>
+									</h4>	
+							</div>		</div>	
+						</div>
+						
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="blog-item">
+								<a href="https://blog.0xprashant.in/posts/htb-oouch/" target="_blank">
+									<div class="blog-img">
+										<img class="img-fluid" src="img/oouch.png" alt="Hackthebox Oouch Machine Walkthorugh">
+									</div>
+											<div class="blog-info">
+													<h4 class="blog-title">
+															<span>Hackthebox Oouch Machine Walkthorugh</span>
+													</h4>	
+											</div>
+								</div>	
+						</div>	
+
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="blog-item">
+								<a href="https://blog.0xprashant.in/posts/htb-quick/" target="_blank">
+									<div class="blog-img">
+										<img class="img-fluid" src="img/quick.png" alt="Hackthebox Quick Machine Walkthorugh">
+									</div>
+											<div class="blog-info">
+													<h4 class="blog-title">
+															<span>Hackthebox Quick Machine Walkthorugh</span>
+													</h4>	
+											</div>
+								</div>	
+						</div>	
+
+
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="blog-item">
+								<a href="https://blog.0xprashant.in/posts/htb-akerva/" target="_blank">
+									<div class="blog-img">
+										<img class="img-fluid" src="img/akerva.png" alt="Hackthebox Akerva Fortress Writeup">
+									</div>
+											<div class="blog-info">
+													<h4 class="blog-title">
+															<span>Hackthebox Akerva Fortress Writeup</span>
+													</h4>	
+											</div>
+								</div>	
+						</div>	
+						
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="blog-item">
+								<a href="https://blog.0xprashant.in/posts/htb-forwardslash/" target="_blank">
+									<div class="blog-img">
+										<img class="img-fluid" src="img/forwardslash.png" alt="Hackthebox Quick Machine Walkthorugh">
+									</div>
+											<div class="blog-info">
+													<h4 class="blog-title">
+															<span>Hackthebox Quick Machine Walkthorugh</span></a>
+													</h4>	
+											</div>
+								</div>	
+						</div>
+			<!-- begin of contact-wrapper -->
+			<div id="contact" class="wrapper contact-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- section heading -->
+							<h3 class="wrapper-heading">Get in Touch</h3>
+							<p>Drop me a text over Email at below details.</p>
+						</div>
+						<div class="col-lg-12 col-md-12">
+							<div class="contact-info">
+								<p><span class="ti-email"></span>htb.dinesh@gmail.com</p>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of contact-wrapper -->
+
+			<!-- begin of contact-wrapper -->
+			<footer class="wrapper footer-wrapper">
+				<div class="container-fluid">
+					<div class="col-md-12 text-center">
+						<div class="footer-social">
+							<a href="https://twitter.com/0xdinesh" target="_blank">Twitter</a>
+							<a href="https://www.instagram.com/" target="_blank">Instagram</a>
+							<a href="https://www.linkedin.com/in/0xdinesh/" target="_blank">Linkedin</a>
+						</div>
+						<p class="footer-copyright">© Copyright 2020 - Dinesh</p>
+					</div>
+				</div>
+			</footer>
+			<!-- end of contact-wrapper -->
+
+			<!-- scroll-to top -->
+			<a class="default-btn scroll-to-top" href="#body"><span class="ti-angle-up "></span></a>
+
+		</div>
+		<!-- end of main-content -->
+    </div>
+    <!-- end of main-wrapper -->
+
+    <!-- All JS -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
